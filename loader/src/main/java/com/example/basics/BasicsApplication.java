@@ -38,7 +38,7 @@ class LoadingRestController {
 
 	@PostMapping("/load")
 	public void go() {
-		this.publisher.publishEvent(new LoadEvent());
+		this.publisher.publishEvent(new MovieLoadEvent());
 	}
 
 }

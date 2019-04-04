@@ -1,16 +1,13 @@
 package com.example.basics.ratings;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.cloud.stream.annotation.StreamListener;
 
 @Log4j2
 class RatingListener {
 
-	@KafkaListener(topics = "ratings")
-	public void logNewRatingMessage(ConsumerRecord<byte[], byte[]> rating) {
-		var key = new String(rating.key());
-		var value = new String(rating.value());
-		log.info("rating key: " + key + ", value: " + value);
+	@StreamListener("ratings")
+	public void logNewRatingMessage(Rating rating) {
+		log.info("new rating: " + rating);
 	}
 }

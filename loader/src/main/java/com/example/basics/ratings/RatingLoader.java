@@ -1,10 +1,9 @@
 package com.example.basics.ratings;
 
 
-import com.example.basics.LoadEvent;
 import com.example.basics.LoaderBindings;
+import com.example.basics.RatingLoadEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.event.EventListener;
 import org.springframework.http.MediaType;
@@ -32,7 +31,7 @@ class RatingLoader {
 		this.channel = binding.ratings();
 	}
 
-	@EventListener(LoadEvent.class)
+	@EventListener(RatingLoadEvent.class)
 	public void onLoadEvent() {
 		this.load.set(!this.load.get());
 	}
@@ -48,18 +47,13 @@ class RatingLoader {
 	private void doLoad() throws Exception {
 
 		var rating = this.ratingService.generateRandomRating(2);
-		var json = toJson(rating);
+		var json = (rating);
 		var msg = MessageBuilder.withPayload(json)
 			.setHeader(MessageHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-			.setHeader(KafkaHeaders.MESSAGE_KEY, Integer.toString(rating.getId()).getBytes())
+			.setHeader(KafkaHeaders.MESSAGE_KEY, (rating.getId()))
 			.build();
 		channel.send(msg);
 		log.info("sending " + Rating.class.getName() + " " + json);
-	}
-
-	@SneakyThrows
-	private String toJson(Rating rating) {
-		return objectMapper.writeValueAsString(rating);
 	}
 }
 
