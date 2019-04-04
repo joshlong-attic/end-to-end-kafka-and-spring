@@ -1,4 +1,4 @@
-package com.example.basics;
+package com.example.basics.movies;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class Movie {
+public class Movie {
 
 	@JsonProperty("movie_id")
 	private int movieId;

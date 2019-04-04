@@ -1,15 +1,13 @@
-package com.example.basics;
+package com.example.basics.movies;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.nio.file.Files;
 import java.util.stream.Stream;
 
-@Component
 class MovieReader {
 
 	private final ObjectMapper objectMapper;
@@ -18,7 +16,8 @@ class MovieReader {
 		this.objectMapper = objectMapper;
 	}
 
-	Stream<Movie> readJson(Resource resource) throws Exception {
+	@SneakyThrows
+	Stream<Movie> readJson(Resource resource) {
 		var path = resource.getFile().toPath();
 		return Files
 			.readAllLines(path)
