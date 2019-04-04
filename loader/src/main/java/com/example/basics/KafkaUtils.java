@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
+@Deprecated // this is never used
 public abstract class KafkaUtils {
 
 	public static <K, V> KafkaTemplate<K, V> buildKafkaTemplate(String[] bootstrapSvrs) {
