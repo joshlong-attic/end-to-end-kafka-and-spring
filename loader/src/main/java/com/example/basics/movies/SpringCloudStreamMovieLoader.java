@@ -3,7 +3,6 @@ package com.example.basics.movies;
 import com.example.basics.LoaderBindings;
 import com.example.basics.MovieLoadEvent;
 import com.example.basics.RatingLoadEvent;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
@@ -24,20 +23,17 @@ class SpringCloudStreamMovieLoader {
 	private final MessageChannel output;
 	private final Resource resource;
 	private final ApplicationEventPublisher publisher;
-	private final ObjectMapper objectMapper;
 
 	SpringCloudStreamMovieLoader(
 		LoaderBindings source,
 		MovieReader movieReader,
 		Resource resource,
-		ApplicationEventPublisher publisher,
-		ObjectMapper objectMapper) {
+		ApplicationEventPublisher publisher) {
 
 		this.publisher = publisher;
 		this.output = source.movies();
 		this.resource = resource;
 		this.movieReader = movieReader;
-		this.objectMapper = objectMapper;
 	}
 
 	@EventListener(MovieLoadEvent.class)

@@ -11,8 +11,6 @@ import org.springframework.core.io.Resource;
 @Configuration
 class MovieConfiguration {
 
-	private final static String MOVIES_JSON = "classpath:/movies.json";
-
 	@Bean
 	MovieListener movieListener() {
 		return new MovieListener();
@@ -23,21 +21,12 @@ class MovieConfiguration {
 		return new MovieReader(objectMapper);
 	}
 
-	//	@Bean
-	KafkaTemplateMovieLoader templateMovieLoader(
-		ObjectMapper om,
-		@Value(MOVIES_JSON) Resource json,
-		MovieReader reader) {
-		return new KafkaTemplateMovieLoader(json, reader, om);
-	}
-
 	@Bean
 	SpringCloudStreamMovieLoader streamMovieLoader(
 		LoaderBindings bindings,
 		ApplicationEventPublisher publisher,
 		MovieReader reader,
-		ObjectMapper om,
-		@Value(MOVIES_JSON) Resource json) {
-		return new SpringCloudStreamMovieLoader(bindings, reader, json, publisher, om);
+		@Value("classpath:/movies.json") Resource json) {
+		return new SpringCloudStreamMovieLoader(bindings, reader, json, publisher);
 	}
 }
