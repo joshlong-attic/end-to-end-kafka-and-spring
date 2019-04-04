@@ -1,6 +1,5 @@
 package com.example.basics.movies;
 
-import com.example.basics.LoaderBindings;
 import com.example.basics.MovieLoadEvent;
 import com.example.basics.RatingLoadEvent;
 import lombok.extern.log4j.Log4j2;
@@ -17,21 +16,21 @@ import org.springframework.messaging.support.MessageBuilder;
 import java.util.function.Consumer;
 
 @Log4j2
-class SpringCloudStreamMovieLoader {
+class MovieLoader {
 
 	private final MovieReader movieReader;
 	private final MessageChannel output;
 	private final Resource resource;
 	private final ApplicationEventPublisher publisher;
 
-	SpringCloudStreamMovieLoader(
-		LoaderBindings source,
+	MovieLoader(
+		MessageChannel channel,
 		MovieReader movieReader,
 		Resource resource,
 		ApplicationEventPublisher publisher) {
 
 		this.publisher = publisher;
-		this.output = source.movies();
+		this.output = channel;
 		this.resource = resource;
 		this.movieReader = movieReader;
 	}

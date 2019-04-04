@@ -21,7 +21,7 @@ class RatingConfiguration {
 	RatingLoader ratingLoader(ObjectMapper objectMapper,
 																											RatingService ratingService,
 																											LoaderBindings bindings) {
-		return new RatingLoader(objectMapper, ratingService, bindings);
+		return new RatingLoader(ratingService, bindings.ratings());
 	}
 
 	@Bean

@@ -22,11 +22,11 @@ class MovieConfiguration {
 	}
 
 	@Bean
-	SpringCloudStreamMovieLoader streamMovieLoader(
+	MovieLoader streamMovieLoader(
 		LoaderBindings bindings,
 		ApplicationEventPublisher publisher,
 		MovieReader reader,
 		@Value("classpath:/movies.json") Resource json) {
-		return new SpringCloudStreamMovieLoader(bindings, reader, json, publisher);
+		return new MovieLoader(bindings.movies(), reader, json, publisher);
 	}
 }
