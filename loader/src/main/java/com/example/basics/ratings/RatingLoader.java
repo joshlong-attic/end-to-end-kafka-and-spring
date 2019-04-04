@@ -34,7 +34,7 @@ class RatingLoader {
 
 	@EventListener(LoadEvent.class)
 	public void onLoadEvent() {
-		this.load.set(true);
+		this.load.set(!this.load.get());
 	}
 
 	@Scheduled(fixedRate = 100)

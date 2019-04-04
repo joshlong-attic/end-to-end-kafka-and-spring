@@ -11,7 +11,7 @@ class RatingListener {
 	public void logNewRatingMessage(ConsumerRecord<byte[], byte[]> rating) {
 		var key = new String(rating.key());
 		var value = new String(rating.value());
-		log.info("key: " + key);
-		log.info("value: " + value);
+		log.info("rating key: " + key);
+		log.info("rating value: " + value);
 	}
 }
