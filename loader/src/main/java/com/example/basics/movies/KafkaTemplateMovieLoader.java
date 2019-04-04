@@ -12,7 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 class KafkaTemplateMovieLoader {
 
 	private final Resource resource;
-	private final KafkaTemplate<byte[], String> template;
+	private final KafkaTemplate<byte[], byte[]> template;
 	private final MovieReader reader;
 	private final ObjectMapper objectMapper;
 
@@ -26,7 +26,7 @@ class KafkaTemplateMovieLoader {
 	@EventListener(LoadEvent.class)
 	public void load() {
 		var stream = reader.readJson(this.resource);
-		stream.forEach(movie -> this.template.send("movies", Integer.toString(movie.getMovieId()).getBytes(), toJson(movie)));
+		stream.forEach(movie -> this.template.send("movies", Integer.toString(movie.getMovieId()).getBytes(), toJson(movie).getBytes()));
 	}
 
 	@SneakyThrows

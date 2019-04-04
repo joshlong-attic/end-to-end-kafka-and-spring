@@ -22,12 +22,12 @@ class MovieConfiguration {
 		return new MovieReader(objectMapper);
 	}
 
-	//	@Bean
+	@Bean
 	KafkaTemplateMovieLoader templateMovieLoader(
-		ObjectMapper objectMapper,
+		ObjectMapper om,
 		@Value(MOVIES_JSON) Resource json,
 		MovieReader reader) {
-		return new KafkaTemplateMovieLoader(json, reader, objectMapper);
+		return new KafkaTemplateMovieLoader(json, reader, om);
 	}
 
 	//	@Bean
